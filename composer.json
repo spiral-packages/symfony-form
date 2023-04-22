@@ -8,7 +8,7 @@
         "livewire",
         "html"
     ],
-    "homepage": "spiral-packages/symfony-form",
+    "homepage": "https://github.com/spiral-packages/symfony-form",
     "license": "MIT",
     "require": {
         "php": "^8.1",
