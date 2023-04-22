@@ -15,7 +15,7 @@ use Spiral\Symfony\Form\Extension\ExtensionFactory;
 use Spiral\Symfony\Form\FormTypeProcessorRegistry;
 use Spiral\Symfony\Form\FormTypeRegistry;
 use Spiral\Symfony\Form\FormTypeRegistryInterface;
-use Spiral\Symfony\Form\HttpFoundation\SpiralRequestHandler;
+use Spiral\Symfony\Form\Extension\HttpFoundation\SpiralRequestHandler;
 use Spiral\Symfony\Form\Processor\AttributeProcessor;
 use Spiral\Symfony\Form\Processor\ConfigProcessor;
 use Spiral\Symfony\Form\Processor\ProcessorInterface;

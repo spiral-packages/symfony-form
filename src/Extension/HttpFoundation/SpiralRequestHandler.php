@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Spiral\Symfony\Form\HttpFoundation;
+namespace Spiral\Symfony\Form\Extension\HttpFoundation;
 
 use Psr\Http\Message\UploadedFileInterface;
 use Spiral\Http\Request\InputManager;

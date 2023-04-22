@@ -4,6 +4,8 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="https://getpsalm.org/schema/config"
         xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+        findUnusedCode="false"
+        findUnusedBaselineEntry="true"
 >
     <projectFiles>
         <directory name="src" />
@@ -22,5 +24,26 @@
                 <referencedFunction name="twig_test_empty" />
             </errorLevel>
         </UndefinedFunction>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <file name="src/Component/FormComponent.php" />
+                <file name="src/Twig/TwigRendererEngine.php" />
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+        <InternalMethod>
+            <errorLevel type="suppress">
+                <file name="src/Twig/TwigRendererEngine.php" />
+            </errorLevel>
+        </InternalMethod>
+        <PossiblyUndefinedMethod>
+            <errorLevel type="suppress">
+                <file name="src/Twig/TwigRendererEngine.php" />
+            </errorLevel>
+        </PossiblyUndefinedMethod>
+        <RedundantPropertyInitializationCheck>
+            <errorLevel type="suppress">
+                <file name="src/Twig/TwigRendererEngine.php" />
+            </errorLevel>
+        </RedundantPropertyInitializationCheck>
     </issueHandlers>
 </psalm>
