@@ -1,0 +1,65 @@
+{
+    "name": "spiral-packages/symfony-form",
+    "description": "Symfony Form integration package for Spiral Framework and Livewire.",
+    "keywords": [
+        "spiral",
+        "form",
+        "forms",
+        "livewire",
+        "html"
+    ],
+    "homepage": "spiral-packages/symfony-form",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "symfony/form": "^5.4 || ^6.0",
+        "spiral/boot": "^3.7",
+        "spiral/config": "^3.7",
+        "spiral/core": "^3.7",
+        "spiral/tokenizer": "^3.7"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.1",
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "spiral/testing": "^2.3",
+        "vimeo/psalm": "^5.9",
+        "spiral/twig-bridge": "^2.0.1",
+        "spiral-packages/livewire": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Spiral\\Symfony\\Form\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Spiral\\Symfony\\Form\\Tests\\": "tests/src"
+        }
+    },
+    "suggest": {
+        "spiral/twig-bridge": "Required for rendering forms via Twig",
+        "spiral-packages/symfony-validator": "For data validation",
+        "spiral-packages/livewire": "For dynamic AJAX driven forms",
+        "spiral/translator": "For the translation of language-dependent data"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "psalm": "vendor/bin/psalm --config=psalm.xml ./src",
+        "cs": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -vvv --dry-run --using-cache=no"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "spiral/composer-publish-plugin": true
+        }
+    },
+    "extra": {
+        "spiral": {
+            "bootloaders": [
+                "Spiral\\Symfony\\Form\\Bootloader\\FormBootloader"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
