@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Spiral\Symfony\Form\Tests\Functional;
 
 use Spiral\Symfony\Form\Bootloader\FormBootloader;
+use Spiral\Symfony\Form\Bootloader\TwigBootloader;
 
 abstract class TestCase extends \Spiral\Testing\TestCase
 {
@@ -23,7 +24,8 @@ abstract class TestCase extends \Spiral\Testing\TestCase
     public function defineBootloaders(): array
     {
         return [
-            FormBootloader::class
+            FormBootloader::class,
+            TwigBootloader::class,
         ];
     }
 }

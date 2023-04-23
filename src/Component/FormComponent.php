@@ -37,6 +37,8 @@ abstract class FormComponent extends LivewireComponent
     public function handle(): void
     {
         $this->form->handleRequest($this->formData);
+
+        $this->submit();
     }
 
     abstract public function createForm(): FormInterface;

@@ -33,6 +33,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Spiral\\Symfony\\Form\\Tests\\App\\": "tests/app",
             "Spiral\\Symfony\\Form\\Tests\\": "tests/src"
         }
     },
