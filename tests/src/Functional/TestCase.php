@@ -21,6 +21,14 @@ abstract class TestCase extends \Spiral\Testing\TestCase
         return \dirname(__DIR__, 2);
     }
 
+    public function defineDirectories(string $root): array
+    {
+        return \array_merge(
+            ['views' => $root . '/views'],
+            parent::defineDirectories($root)
+        );
+    }
+
     public function defineBootloaders(): array
     {
         return [

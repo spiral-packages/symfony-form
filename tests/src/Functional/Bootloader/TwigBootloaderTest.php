@@ -21,7 +21,7 @@ final class TwigBootloaderTest extends TestCase
 
         $this->assertIsArray($config['namespaces']['forms']);
         $this->assertSame(
-            \rtrim($dirs->get('vendor'), '/').'/spiral-packages/symfony-form/views/twig',
+            \dirname(__DIR__, 4).'/views/twig',
             $config['namespaces']['forms'][0]
         );
     }

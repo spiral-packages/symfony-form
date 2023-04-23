@@ -25,11 +25,11 @@ final class TwigBootloader extends Bootloader
         TwigBridgeBootloader::class,
     ];
 
-    public function init(ViewsBootloader $views, DirectoriesInterface $dirs): void
+    public function init(ViewsBootloader $views): void
     {
         $views->addDirectory(
             'forms',
-            \rtrim($dirs->get('vendor'), '/').'/spiral-packages/symfony-form/views/twig'
+            \dirname(__DIR__, 2).'/views/twig'
         );
     }
 

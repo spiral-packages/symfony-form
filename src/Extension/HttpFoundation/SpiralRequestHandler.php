@@ -10,15 +10,12 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\RequestHandlerInterface;
-use Symfony\Component\Form\Util\ServerParams;
 
 class SpiralRequestHandler implements RequestHandlerInterface
 {
-    private ServerParams $serverParams;
-
-    public function __construct(ServerParams $serverParams = null)
-    {
-        $this->serverParams = $serverParams ?? new ServerParams();
+    public function __construct(
+        protected readonly ServerParams $serverParams = new ServerParams()
+    ) {
     }
 
     public function handleRequest(FormInterface $form, mixed $request = null): void

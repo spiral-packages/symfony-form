@@ -24,7 +24,8 @@
         "spiral/testing": "^2.3",
         "vimeo/psalm": "^5.9",
         "spiral/twig-bridge": "^2.0.1",
-        "spiral-packages/livewire": "dev-master"
+        "spiral-packages/livewire": "dev-master",
+        "spiral/framework": "^3.7"
     },
     "autoload": {
         "psr-4": {
