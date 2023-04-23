@@ -7,9 +7,9 @@ namespace Spiral\Symfony\Form\Extension;
 use Psr\Container\ContainerInterface;
 use Spiral\Core\Container\Autowire;
 use Spiral\Symfony\Form\Config\FormConfig;
+use Spiral\Symfony\Form\Extension\HttpFoundation\HttpFoundationExtension;
 use Spiral\Translator\TranslatorInterface;
 use Symfony\Component\Form\Extension\Core\CoreExtension;
-use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\FormExtensionInterface;
 use Symfony\Component\Validator\Validation;
@@ -47,7 +47,7 @@ final class DefaultExtensionsRegistry implements DefaultExtensionsRegistryInterf
     private function initDefaultExtensions(): void
     {
         $this->extensions[] = new CoreExtension();
-        $this->extensions[] = new HttpFoundationExtension();
+        $this->extensions[] = $this->factory->create(HttpFoundationExtension::class);
         $this->addValidatorExtension();
     }
 
