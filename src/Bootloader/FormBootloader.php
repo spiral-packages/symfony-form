@@ -7,6 +7,7 @@ namespace Spiral\Symfony\Form\Bootloader;
 use Spiral\Boot\AbstractKernel;
 use Spiral\Boot\Bootloader\Bootloader;
 use Spiral\Config\ConfiguratorInterface;
+use Spiral\Core\Container;
 use Spiral\Core\FactoryInterface;
 use Spiral\Symfony\Form\Config\FormConfig;
 use Spiral\Symfony\Form\Extension\DefaultExtensionsRegistry;
@@ -42,10 +43,6 @@ final class FormBootloader extends Bootloader
         FormTypeRegistryInterface::class => FormTypeRegistry::class,
     ];
 
-    protected const BINDINGS = [
-        RequestHandlerInterface::class => SpiralRequestHandler::class,
-    ];
-
     public function __construct(
         private readonly ConfiguratorInterface $config
     ) {
@@ -60,8 +57,11 @@ final class FormBootloader extends Bootloader
         FormConfig $config,
         FactoryInterface $factory,
         AbstractKernel $kernel,
-        FormTypeProcessorRegistry $registry
+        FormTypeProcessorRegistry $registry,
+        Container $container
     ): void {
+        $container->bind(RequestHandlerInterface::class, $config->getRequestHandler());
+
         $this->registerFormTypeProcessors($config, $factory, $kernel, $registry);
     }
 
@@ -71,6 +71,7 @@ final class FormBootloader extends Bootloader
             FormConfig::CONFIG,
             [
                 'theme' => 'forms:bootstrap_5_layout.twig',
+                'request_handler' => SpiralRequestHandler::class,
                 'form_types' => [],
                 'extensions' => [],
                 'processors' => [

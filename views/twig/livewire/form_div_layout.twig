@@ -1,0 +1,23 @@
+{% use "forms:form_div_layout" %}
+
+{%- block form_start -%}
+    {% set attr = attr|merge({'wire:submit.prevent': 'handle'}) %}
+    {{- parent() -}}
+{%- endblock form_start -%}
+
+{%- block widget_attributes -%}
+    id="{{ id }}" name="{{ field_livewire_model(full_name) }}" wire:model.defer="{{ field_livewire_model(full_name) }}"
+    {%- if disabled %} disabled="disabled"{% endif -%}
+    {%- if required %} required="required"{% endif -%}
+    {{ block('attributes') }}
+{%- endblock widget_attributes -%}
+
+{%- block checkbox_widget -%}
+    {% set attr = attr|merge({'wire:loading.attr': 'disabled'}) %}
+    {{- parent() -}}
+{%- endblock checkbox_widget -%}
+
+{%- block button_widget -%}
+    {% set attr = attr|merge({'wire:loading.attr': 'disabled', 'wire:target': 'handle'}) %}
+    {{- parent() -}}
+{%- endblock button_widget -%}

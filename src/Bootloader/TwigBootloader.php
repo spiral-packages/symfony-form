@@ -6,7 +6,6 @@ namespace Spiral\Symfony\Form\Bootloader;
 
 use Spiral\Boot\AbstractKernel;
 use Spiral\Boot\Bootloader\Bootloader;
-use Spiral\Boot\DirectoriesInterface;
 use Spiral\Symfony\Form\Config\FormConfig;
 use Spiral\Symfony\Form\Twig\Extension\FormExtension;
 use Spiral\Symfony\Form\Twig\Extension\TranslationExtension;

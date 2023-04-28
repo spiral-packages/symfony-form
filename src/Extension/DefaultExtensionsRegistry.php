@@ -12,6 +12,7 @@ use Spiral\Translator\TranslatorInterface;
 use Symfony\Component\Form\Extension\Core\CoreExtension;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\FormExtensionInterface;
+use Symfony\Component\Validator\ConstraintValidatorFactoryInterface;
 use Symfony\Component\Validator\Validation;
 
 /**
@@ -57,7 +58,9 @@ final class DefaultExtensionsRegistry implements DefaultExtensionsRegistryInterf
             return;
         }
 
-        $builder = Validation::createValidatorBuilder()->enableAnnotationMapping();
+        $builder = Validation::createValidatorBuilder()
+            ->enableAnnotationMapping()
+            ->setConstraintValidatorFactory($this->container->get(ConstraintValidatorFactoryInterface::class));
 
         if ($this->container->has(TranslatorInterface::class)) {
             $builder->setTranslator($this->container->get(TranslatorInterface::class));

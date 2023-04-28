@@ -75,14 +75,14 @@ class SpiralRequestHandler implements RequestHandlerInterface
             }
 
             if (\is_array($params) && \is_array($files)) {
-                $data = array_replace_recursive($params, $files);
+                $data = \array_replace_recursive($params, $files);
             } else {
                 $data = $params ?: $files;
             }
         }
 
         // Don't auto-submit the form unless at least one field is present.
-        if ('' === $name && \count(array_intersect_key($data ?? [], $form->all())) <= 0) {
+        if ('' === $name && \count(\array_intersect_key($data ?? [], $form->all())) <= 0) {
             return;
         }
 
