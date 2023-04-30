@@ -6,6 +6,7 @@ namespace Spiral\Symfony\Form\Component;
 
 use Spiral\Livewire\Attribute\Model;
 use Spiral\Livewire\Component\LivewireComponent;
+use Spiral\Livewire\Response;
 use Spiral\Views\ViewInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -41,6 +42,24 @@ abstract class FormComponent extends LivewireComponent
         if ($this->form->isValid()) {
             $this->submit();
         }
+    }
+
+    public function dehydrate(Response $response): void
+    {
+        if ($this->form->isSubmitted() && !$this->form->isValid()) {
+            $this->setValidationErrors($this->getFormErrors($this->form));
+        }
+    }
+
+    // TODO add errors from child forms
+    private function getFormErrors(FormInterface $form): array
+    {
+        $errors = [];
+        foreach ($form->getErrors(true) as $error) {
+            $errors['formData.' . $form->getName() . '.' . $error->getOrigin()->getName()][] = $error->getMessage();
+        }
+
+        return $errors;
     }
 
     abstract public function createForm(): FormInterface;
