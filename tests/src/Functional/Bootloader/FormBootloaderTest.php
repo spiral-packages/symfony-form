@@ -53,6 +53,7 @@ final class FormBootloaderTest extends TestCase
 
         $this->assertSame([
             'theme' => 'forms:bootstrap_5_layout.twig',
+            'request_handler' => SpiralRequestHandler::class,
             'form_types' => [],
             'extensions' => [],
             'processors' => [

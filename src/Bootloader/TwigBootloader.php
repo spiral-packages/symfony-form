@@ -8,7 +8,6 @@ use Spiral\Boot\AbstractKernel;
 use Spiral\Boot\Bootloader\Bootloader;
 use Spiral\Symfony\Form\Config\FormConfig;
 use Spiral\Symfony\Form\Twig\Extension\FormExtension;
-use Spiral\Symfony\Form\Twig\Extension\TranslationExtension;
 use Spiral\Symfony\Form\Twig\TwigRendererEngine;
 use Spiral\Twig\Bootloader\TwigBootloader as TwigBridgeBootloader;
 use Spiral\Twig\TwigEngine;
@@ -17,11 +16,13 @@ use Spiral\Views\ViewManager;
 use Spiral\Views\ViewsInterface;
 use Symfony\Component\Form\FormRenderer;
 use Twig\RuntimeLoader\FactoryRuntimeLoader;
+use Zentlix\TwigExtensions\Bootloader\ExtensionsBootloader;
 
 final class TwigBootloader extends Bootloader
 {
     protected const DEPENDENCIES = [
         TwigBridgeBootloader::class,
+        ExtensionsBootloader::class,
     ];
 
     public function init(ViewsBootloader $views): void
@@ -32,13 +33,9 @@ final class TwigBootloader extends Bootloader
         );
     }
 
-    public function boot(
-        AbstractKernel $kernel,
-        TwigBridgeBootloader $twig,
-        TranslationExtension $translationExtension
-    ): void {
+    public function boot(AbstractKernel $kernel, TwigBridgeBootloader $twig): void
+    {
         $twig->addExtension(new FormExtension());
-        $twig->addExtension($translationExtension);
 
         $kernel->booted(function (ViewsInterface $views, FormConfig $config) {
             $this->registerTwigRuntimeLoader($views, $config);

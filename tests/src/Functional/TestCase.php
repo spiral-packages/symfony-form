@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Spiral\Symfony\Form\Tests\Functional;
 
+use Spiral\Bootloader\Http\RouterBootloader;
+use Spiral\Nyholm\Bootloader\NyholmBootloader;
 use Spiral\Symfony\Form\Bootloader\FormBootloader;
 use Spiral\Symfony\Form\Bootloader\TwigBootloader;
 
@@ -32,6 +34,8 @@ abstract class TestCase extends \Spiral\Testing\TestCase
     public function defineBootloaders(): array
     {
         return [
+            NyholmBootloader::class,
+            RouterBootloader::class,
             FormBootloader::class,
             TwigBootloader::class,
         ];

@@ -79,6 +79,10 @@ final class FormComponentTest extends TestCase
             ->expects($this->once())
             ->method('getData')
             ->willReturn(['email' => 'foo@gmail.com']);
+        $form
+            ->expects($this->once())
+            ->method('isValid')
+            ->willReturn(true);
 
         $factory = $this->createMock(FormFactoryInterface::class);
         $factory
