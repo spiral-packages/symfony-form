@@ -31,7 +31,7 @@ class ArrayRequestHandler implements RequestHandlerInterface
         }
 
         // Don't auto-submit the form unless at least one field is present.
-        if ('' === $name && \count(\array_intersect_key($data, $form->all())) <= 0) {
+        if ('' === $name && \count(\array_intersect_key($data ?? [], $form->all())) <= 0) {
             return;
         }
 
