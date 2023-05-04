@@ -8,6 +8,7 @@ use Spiral\Bootloader\Http\RouterBootloader;
 use Spiral\Nyholm\Bootloader\NyholmBootloader;
 use Spiral\Symfony\Form\Bootloader\FormBootloader;
 use Spiral\Symfony\Form\Bootloader\TwigBootloader;
+use Spiral\Validation\Symfony\Bootloader\ValidatorBootloader;
 
 abstract class TestCase extends \Spiral\Testing\TestCase
 {
@@ -36,6 +37,7 @@ abstract class TestCase extends \Spiral\Testing\TestCase
         return [
             NyholmBootloader::class,
             RouterBootloader::class,
+            ValidatorBootloader::class,
             FormBootloader::class,
             TwigBootloader::class,
         ];
