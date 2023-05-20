@@ -4,7 +4,7 @@ on:
         branches:
             - '*.*'
 
-name: phpunit
+name: coding-standards
 
 jobs:
     phpunit:
