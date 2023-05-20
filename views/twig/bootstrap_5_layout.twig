@@ -210,10 +210,12 @@
 
 {%- block checkbox_widget -%}
     {%- set attr_class = attr_class|default(attr.class|default('')) -%}
-    {%- set row_class = '' -%}
+    {%- if row_class is empty -%}
+        {%- set row_class = '' -%}
+    {%- endif -%}
     {%- if 'btn-check' not in attr_class -%}
         {%- set attr_class = attr_class ~ ' form-check-input' -%}
-        {%- set row_class = 'form-check' -%}
+        {%- set row_class = row_class ~ ' form-check' -%}
     {%- endif -%}
     {%- set attr = attr|merge({class: attr_class|trim}) -%}
     {%- set parent_label_class = parent_label_class|default(label_attr.class|default('')) -%}

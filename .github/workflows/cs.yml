@@ -14,5 +14,3 @@ jobs:
                 ['ubuntu-latest']
             php: >-
                 ['8.2']
-            stability: >-
-                ['prefer-lowest', 'prefer-stable']
