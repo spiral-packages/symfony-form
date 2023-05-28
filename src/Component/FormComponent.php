@@ -9,7 +9,6 @@ use Spiral\Livewire\Component\LivewireComponent;
 use Spiral\Livewire\Response;
 use Spiral\Views\ViewInterface;
 use Symfony\Component\Form\FormError;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 abstract class FormComponent extends LivewireComponent
@@ -18,11 +17,6 @@ abstract class FormComponent extends LivewireComponent
 
     #[Model]
     public array $formData = [];
-
-    public function __construct(
-        protected readonly FormFactoryInterface $formFactory
-    ) {
-    }
 
     public function boot(): void
     {
