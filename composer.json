@@ -21,14 +21,14 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^10.1",
-        "friendsofphp/php-cs-fixer": "^3.15",
+        "friendsofphp/php-cs-fixer": "^3.16",
         "spiral/testing": "^2.3",
-        "vimeo/psalm": "^5.9",
+        "vimeo/psalm": "^5.11",
         "spiral/twig-bridge": "^2.0.1",
-        "spiral-packages/livewire": "dev-master",
+        "spiral-packages/livewire": "^1.0",
         "spiral/framework": "^3.7",
         "spiral/nyholm-bridge": "^1.3",
-        "spiral-packages/symfony-validator": "^1.3"
+        "spiral-packages/symfony-validator": "^1.4"
     },
     "autoload": {
         "psr-4": {
