@@ -18,22 +18,6 @@ use Symfony\Component\Form\FormView;
 
 final class FormComponentTest extends TestCase
 {
-    public function testBootShouldCallCreateForm(): void
-    {
-        $form = $this->createMock(FormInterface::class);
-        $factory = $this->createMock(FormFactoryInterface::class);
-        $factory
-            ->expects($this->once())
-            ->method('create')
-            ->with(SignInForm::class)
-            ->willReturn($form);
-
-        $component = new SignInComponent($factory);
-        $component->boot();
-
-        $this->assertSame($form, $component->getForm());
-    }
-
     public function testRenderToViewShouldCreateFormView(): void
     {
         $formView = $this->createMock(FormView::class);
@@ -62,7 +46,6 @@ final class FormComponentTest extends TestCase
             $this->createMock(RouterInterface::class)
         );
 
-        $component->boot();
         $component->renderToView();
 
         $this->assertSame($formView, $component->getRenderContext()['form']);
@@ -93,7 +76,6 @@ final class FormComponentTest extends TestCase
 
         $component = new SignInComponent($factory);
         $component->formData = ['email' => 'foo@gmail.com'];
-        $component->boot();
         $component->handle();
 
         $this->assertSame(['email' => 'foo@gmail.com'], $component->getData());

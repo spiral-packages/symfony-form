@@ -10,6 +10,8 @@ use Spiral\Livewire\Response;
 use Spiral\Views\ViewInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\PropertyAccess\PropertyPath;
 
 abstract class FormComponent extends LivewireComponent
 {
@@ -25,6 +27,7 @@ abstract class FormComponent extends LivewireComponent
         }
 
         $this->renderContext['form'] = $this->form->createView();
+        $this->setData($this->renderContext['form']);
 
         return parent::renderToView();
     }
@@ -44,7 +47,7 @@ abstract class FormComponent extends LivewireComponent
 
     public function dehydrate(Response $response): void
     {
-        if ($this->form->isSubmitted() && !$this->form->isValid()) {
+        if ($this->form !== null && $this->form->isSubmitted() && !$this->form->isValid()) {
             $this->setValidationErrors($this->getFormErrors($this->form));
         }
     }
@@ -59,6 +62,15 @@ abstract class FormComponent extends LivewireComponent
         }
 
         return $errors;
+    }
+
+    private function setData(FormView $formView): void
+    {
+        foreach ($formView->children as $child) {
+            $path = new PropertyPath($child->vars['full_name']);
+
+            $this->formData[\implode('.', $path->getElements())] = $child->vars['value'];
+        }
     }
 
     abstract public function createForm(): FormInterface;
