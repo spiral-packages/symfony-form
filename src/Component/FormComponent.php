@@ -13,18 +13,17 @@ use Symfony\Component\Form\FormInterface;
 
 abstract class FormComponent extends LivewireComponent
 {
-    protected FormInterface $form;
+    protected ?FormInterface $form = null;
 
     #[Model]
     public array $formData = [];
 
-    public function boot(): void
-    {
-        $this->form = $this->createForm();
-    }
-
     public function renderToView(): ViewInterface
     {
+        if ($this->form === null) {
+            $this->form = $this->createForm();
+        }
+
         $this->renderContext['form'] = $this->form->createView();
 
         return parent::renderToView();
@@ -32,6 +31,10 @@ abstract class FormComponent extends LivewireComponent
 
     public function handle(): void
     {
+        if ($this->form === null) {
+            $this->form = $this->createForm();
+        }
+
         $this->form->handleRequest($this->formData);
 
         if ($this->form->isValid()) {
