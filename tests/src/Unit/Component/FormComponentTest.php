@@ -57,7 +57,7 @@ final class FormComponentTest extends TestCase
         $form
             ->expects($this->once())
             ->method('handleRequest')
-            ->with(['email' => 'foo@gmail.com']);
+            ->with(['form_data' => ['email' => 'foo@gmail.com']]);
         $form
             ->expects($this->once())
             ->method('getData')
@@ -75,7 +75,7 @@ final class FormComponentTest extends TestCase
             ->willReturn($form);
 
         $component = new SignInComponent($factory);
-        $component->formData = ['email' => 'foo@gmail.com'];
+        $component->form_data = ['email' => 'foo@gmail.com'];
         $component->handle();
 
         $this->assertSame(['email' => 'foo@gmail.com'], $component->getData());

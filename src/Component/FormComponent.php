@@ -11,14 +11,14 @@ use Spiral\Views\ViewInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\PropertyAccess\PropertyPath;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 abstract class FormComponent extends LivewireComponent
 {
     protected ?FormInterface $form = null;
 
     #[Model]
-    public array $formData = [];
+    public array $form_data = [];
 
     public function renderToView(): ViewInterface
     {
@@ -38,7 +38,7 @@ abstract class FormComponent extends LivewireComponent
             $this->form = $this->createForm();
         }
 
-        $this->form->handleRequest($this->formData);
+        $this->form->handleRequest(['form_data' => $this->form_data]);
 
         if ($this->form->isValid()) {
             $this->submit();
@@ -58,7 +58,7 @@ abstract class FormComponent extends LivewireComponent
         $errors = [];
         /** @var FormError $error */
         foreach ($form->getErrors(true) as $error) {
-            $errors['formData.' . $form->getName() . '.' . $error->getOrigin()?->getName()][] = $error->getMessage();
+            $errors['form_data.' . $form->getName() . '.' . $error->getOrigin()?->getName()][] = $error->getMessage();
         }
 
         return $errors;
@@ -66,10 +66,19 @@ abstract class FormComponent extends LivewireComponent
 
     private function setData(FormView $formView): void
     {
-        foreach ($formView->children as $child) {
-            $path = new PropertyPath($child->vars['full_name']);
+        $propertyAccess = new PropertyAccessor();
+        $childrenData = function (FormView $form) use (&$childrenData, $propertyAccess): void {
+            if ($form->children === []) {
+                $propertyAccess->setValue($this, $form->vars['full_name'], $form->vars['value']);
+            }
 
-            $this->formData[\implode('.', $path->getElements())] = $child->vars['value'];
+            foreach ($form->children as $child) {
+                $childrenData($child);
+            }
+        };
+
+        foreach ($formView->children as $child) {
+            $childrenData($child);
         }
     }
 

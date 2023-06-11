@@ -173,7 +173,7 @@ final class FormExtension extends AbstractExtension
     {
         $path = new PropertyPath($fullName);
 
-        return \implode('.', \array_merge(['formData'], $path->getElements()));
+        return \implode('.', $path->getElements());
     }
 }
 
